@@ -19,7 +19,7 @@ body{
    
 .hero{
     position:relative;
-    height:100svh;
+    height:100vh;
 
     background:
         linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.45)),
@@ -999,6 +999,26 @@ nav a{
 
 }
 
+.menu{
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+
+    z-index:1000;
+
+    transition:transform .35s ease;
+}
+
+.menu.hide{
+
+    transform:translateY(-100%);
+
+}
+
 @keyframes showMessage{
 
     from{
@@ -1171,6 +1191,7 @@ nav a{
     .hero-title{
         width:90vw;
         max-width:420px;
+        padding-top: 70px;
     }
 
     .hero-date{
@@ -1195,7 +1216,7 @@ nav a{
 
 <body>
 
-<nav>
+<nav class="menu">
 
     <a href="#location">Локация</a>
     <a href="#rsvp">Анкета гостя</a>
@@ -1610,6 +1631,35 @@ function updateTimer(){
     document.getElementById("seconds").textContent = seconds;
 }
 </script>
+
+<script>
+
+        let lastScroll = 0;
+
+        const menu = document.querySelector(".menu");
+
+        window.addEventListener("scroll", () => {
+
+            let currentScroll = window.pageYOffset;
+
+            if(currentScroll > lastScroll && currentScroll > 80){
+
+                // листаем вниз
+                menu.classList.add("hide");
+
+            } else {
+
+                // листаем вверх
+                menu.classList.remove("hide");
+
+            }
+
+            lastScroll = currentScroll;
+
+        }); 
+</script>
+
+
 
 </body>
 </html>
